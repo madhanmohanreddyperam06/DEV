@@ -232,7 +232,7 @@ const AboutInfo = () => {
               hover:text-white/[0.85]
             "
           >
-            KARACHI, PAKISTAN
+            CUDDAPAH, ANDHRA PRADESH, INDIA
           </span>
 
           <span className="mx-4 h-3 w-px shrink-0 bg-red-500/[0.65]" />

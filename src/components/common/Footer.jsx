@@ -1086,7 +1086,7 @@ const Footer = () => {
             />
 
             <span>
-              Karachi · Pakistan
+              Cuddapah · Andhra Pradesh · India
             </span>
           </div>
 
