@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: "honer-those";
+  src: url("/fonts/honer-those.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BeStrong";
+  src: url("/fonts/BeStrong-MVYAv.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "doner";
+  src: url("/fonts/doner-regulardisplay.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GCGudlakDemo";
+  src: url("/fonts/GCGudlakDemo-SemiBold-BF695cd59bc5211.ttf") format("truetype");
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: "Bremer";
+  src: url("/fonts/Bremer.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dangerous";
+  src: url("/fonts/Dangerous-BF694a9ca521b88.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MEIRO";
+  src: url("/fonts/MEIRO.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newborn";
+  src: url("/fonts/Newborn-BF694aa0119bfca.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: attr(width) / attr(height);
+  /* Maintains Aspect Ratio */
+}
