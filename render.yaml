@@ -1,11 +1,7 @@
 services:
   - type: web
     name: portfolio
-    env: static
+    env: node
     buildCommand: npm run build
-    publishDir: dist
+    startCommand: npm start
     nodeVersion: 22
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
