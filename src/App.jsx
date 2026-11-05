@@ -26,7 +26,7 @@ function App() {
 
           <section
             id="home"
-            className="min-h-screen overflow-hidden"
+            className="min-h-screen"
           >
             <Hero />
           </section>
@@ -35,7 +35,7 @@ function App() {
 
           <section
             id="about"
-            className="relative min-h-screen overflow-visible"
+            className="relative min-h-screen"
           >
             <Suspense fallback={<div className="min-h-screen bg-[#080808]" />}>
               <About />
@@ -46,7 +46,7 @@ function App() {
 
           <section
             id="projects"
-            className="min-h-screen overflow-hidden"
+            className="min-h-screen"
           >
             <Suspense fallback={<div className="min-h-screen bg-[#080808]" />}>
               <Projects />
@@ -57,7 +57,7 @@ function App() {
 
           <section
             id="contact"
-            className="min-h-screen overflow-hidden"
+            className="min-h-screen"
           >
             <Suspense fallback={<div className="min-h-screen bg-[#080808]" />}>
               <Footer />

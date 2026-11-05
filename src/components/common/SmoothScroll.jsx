@@ -1,35 +1,45 @@
 // src/components/SmoothScroll.jsx
-import { ReactLenis } from 'lenis/react'
+import { ReactLenis, useLenis } from 'lenis/react'
 import { useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const SmoothScroll = ({ children }) => {
-  useEffect(() => {
-    // Refresh ScrollTrigger after Lenis is mounted
-    ScrollTrigger.refresh()
-  }, [])
+const SmoothScrollWrapper = ({ children }) => {
+  const lenis = useLenis()
 
+  useEffect(() => {
+    // Sync Lenis with GSAP ScrollTrigger
+    if (lenis) {
+      lenis.on('scroll', ScrollTrigger.update)
+      ScrollTrigger.refresh()
+    }
+  }, [lenis])
+
+  return <>{children}</>
+}
+
+const SmoothScroll = ({ children }) => {
   return (
     <ReactLenis
       root
       options={{
-        lerp: 0.05,          // Lower = more floaty/smooth (0.05 is ultra-smooth)
-        duration: 1.5,        // Longer easing curve
+        lerp: 0.1,           // Higher = more responsive (0.1 is balanced)
+        duration: 1.2,       // Shorter duration for snappier feel
         smoothWheel: true,
         smoothTouch: true,
-        wheelMultiplier: 0.8, // Slightly reduces wheel sensitivity
-        touchMultiplier: 2,   // Better feel on mobile
+        wheelMultiplier: 1,  // Normal wheel sensitivity
+        touchMultiplier: 2,  // Better feel on mobile
         infinite: false,
         orientation: 'vertical',
         gestureOrientation: 'vertical',
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom exponential ease
       }}
-      onScroll={ScrollTrigger.update}
     >
-      {children}
+      <SmoothScrollWrapper>
+        {children}
+      </SmoothScrollWrapper>
     </ReactLenis>
   )
 }

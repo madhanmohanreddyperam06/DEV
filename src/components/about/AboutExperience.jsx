@@ -359,13 +359,13 @@ const AboutExperience = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-black"
+      className="relative w-full bg-black"
     >
       {/* SCENE 1 */}
 
       <div
         ref={visualRef}
-        className="relative h-screen w-full overflow-hidden"
+        className="relative h-screen w-full"
       >
         <AboutVisual />
       </div>
@@ -374,7 +374,7 @@ const AboutExperience = () => {
 
       <div
         ref={infoRef}
-        className="relative h-screen w-full overflow-hidden"
+        className="relative h-screen w-full"
       >
         <AboutInfo />
       </div>

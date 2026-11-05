@@ -726,7 +726,6 @@ const ProjectHorizontal = () => {
         relative
         h-screen
         w-full
-        overflow-hidden
         bg-[#080808]
       "
     >
