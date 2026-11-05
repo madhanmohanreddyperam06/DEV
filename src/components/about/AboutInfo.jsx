@@ -70,8 +70,8 @@ const AboutInfo = () => {
           justify-start
 
           px-[6vw]
-          pt-[12vh]
-          pb-[8vh]
+          pt-[8vh]
+          pb-[6vh]
 
           lg:w-[56%]
           lg:px-[5vw]
@@ -319,6 +319,18 @@ const AboutInfo = () => {
                 <span>Percentage: 99.33 / 100</span>
               </div>
             </div>
+
+            {/* Continuous Learning Card (Mobile Only) */}
+            {isMobile && (
+              <div className="border border-white/[0.15] p-4 bg-white/[0.02] mb-4">
+                <h3 className="font-[doner] text-xs uppercase tracking-[0.14em] text-white mb-2">
+                  Continuous Learning
+                </h3>
+                <p className="text-white/[0.5] text-[10px] leading-relaxed">
+                  Always exploring new technologies and participating in hackathons to expand my knowledge and practical experience.
+                </p>
+              </div>
+            )}
 
             {/* ===================================================
                 LESS BUTTON (AT BOTTOM)
