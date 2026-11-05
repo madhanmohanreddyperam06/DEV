@@ -1,10 +1,23 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
 const heroImage = "/images/herobg1.avif";
 
 const AboutInfo = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const shouldShowExpanded = isExpanded || isMobile;
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[#080808] text-[#F1F0EC]">
+    <div className={`relative w-full bg-[#080808] text-[#F1F0EC] ${isMobile ? 'h-auto min-h-screen' : (isExpanded ? 'h-auto min-h-screen overflow-y-auto' : 'h-screen overflow-hidden')}`}>
       {/* =====================================================
           RIGHT SIDE LABEL
       ====================================================== */}
@@ -54,14 +67,16 @@ const AboutInfo = () => {
           h-full
           w-full
           flex-col
-          justify-center
+          justify-start
 
           px-[6vw]
-          py-[10vh]
+          pt-[12vh]
+          pb-[8vh]
 
           lg:w-[56%]
           lg:px-[5vw]
           lg:pr-[4vw]
+          min-h-screen
         "
       >
         {/* ===================================================
@@ -141,7 +156,7 @@ const AboutInfo = () => {
           data-about-info-paragraph
           data-about-description
           className="
-            mt-8
+            mt-5
             max-w-[600px]
 
             font-[doner]
@@ -233,53 +248,158 @@ const AboutInfo = () => {
         </div>
 
         {/* ===================================================
-            MORE BUTTON
+            EDUCATIONAL BACKGROUND (EXPANDABLE)
         ==================================================== */}
 
-        <button
-          className="
-            mt-8
-            inline-flex
-            items-center
-            gap-3
-            rounded-none
-            border
-            border-[#F1F0EC]/35
-            bg-transparent
-            px-7
-            py-3.5
-            font-[doner]
-            text-[10px]
-            uppercase
-            tracking-[0.16em]
-            text-[#F1F0EC]/80
-            transition-all
-            duration-500
-            ease-out
-            hover:border-[#F1F0EC]
-            hover:bg-[#F1F0EC]
-            hover:text-[#080808]
-            sm:px-8
-            sm:py-4
-            sm:text-[11px]
-          "
-        >
-          <span>
-            More
-          </span>
-
-          <span
+        {shouldShowExpanded && (
+          <div
             className="
-              translate-x-0
-              transition-transform
-              duration-500
-              ease-out
-              group-hover:translate-x-1
+              mt-4
+              space-y-4
+              border-t
+              border-white/[0.1]
+              pt-5
+              pb-4
             "
           >
-            ↗
-          </span>
-        </button>
+            <div className="text-[#F1F0EC]/60 font-[doner] text-[9px] uppercase tracking-[0.18em mb-6">
+              Educational Background
+            </div>
+
+            {/* Education Item 1 */}
+            <div className="border-l-2 border-red-500/30 pl-4">
+              <h3 className="font-[doner] text-xs uppercase tracking-[0.14em] text-white mb-2">
+                Bachelor of Technology
+              </h3>
+              <p className="text-white/[0.7] text-[11px] mb-1">
+                Kalasalingam University
+              </p>
+              <p className="text-white/[0.5] text-[10px] leading-relaxed mb-2">
+                Pursuing an intensive Computer Science & Engineering curriculum focusing on Artificial Intelligence & Machine Learning.
+              </p>
+              <div className="flex gap-4 text-[9px] text-white/[0.4]">
+                <span>2022-2026</span>
+                <span>•</span>
+                <span>CGPA: 8.25 / 10</span>
+              </div>
+            </div>
+
+            {/* Education Item 2 */}
+            <div className="border-l-2 border-red-500/30 pl-4">
+              <h3 className="font-[doner] text-xs uppercase tracking-[0.14em] text-white mb-2">
+                Higher Secondary Education
+              </h3>
+              <p className="text-white/[0.7] text-[11px] mb-1">
+                Narayana Junior College
+              </p>
+              <p className="text-white/[0.5] text-[10px] leading-relaxed mb-2">
+                Completed rigorous pre-university curriculum with focus on Mathematics, Physics and Chemistry with building strong mathematical modeling and analytical reasoning skills.
+              </p>
+              <div className="flex gap-4 text-[9px] text-white/[0.4]">
+                <span>2020-2022</span>
+                <span>•</span>
+                <span>Percentage: 84.20  / 100</span>
+              </div>
+            </div>
+
+            {/* Education Item 3 */}
+            <div className="border-l-2 border-red-500/30 pl-4">
+              <h3 className="font-[doner] text-xs uppercase tracking-[0.14em] text-white mb-2">
+                Secondary School Education
+              </h3>
+              <p className="text-white/[0.7] text-[11px] mb-1">
+                Swamy Vivekananda E.M & T.M High School
+              </p>
+              <p className="text-white/[0.5] text-[10px] leading-relaxed mb-2">
+                Graduated with near-perfect academic distinction, demonstrating consistent commitment to academic discipline, analytical excellence and teamwork.
+              </p>
+              <div className="flex gap-4 text-[9px] text-white/[0.4]">
+                <span>2019-2020</span>
+                <span>•</span>
+                <span>Percentage: 99.33 / 100</span>
+              </div>
+            </div>
+
+            {/* ===================================================
+                LESS BUTTON (AT BOTTOM)
+            ==================================================== */}
+
+            {!isMobile && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="
+                  mt-6
+                  inline-flex
+                  items-center
+                  gap-3
+                  font-[doner]
+                  text-[10px]
+                  uppercase
+                  tracking-[0.16em]
+                  text-[#F1F0EC]/80
+                  transition-colors
+                  duration-300
+                  hover:text-[#F1F0EC]
+                  sm:text-[11px]
+                "
+              >
+                <span>
+                  Less
+                </span>
+
+                <span
+                  className="
+                    transition-transform
+                    duration-300
+                  "
+                  style={{
+                    transform: 'rotate(45deg)'
+                  }}
+                >
+                  ↓
+                </span>
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* ===================================================
+            MORE BUTTON (WHEN COLLAPSED)
+        ==================================================== */}
+
+        {!isExpanded && !isMobile && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="
+              mt-8
+              inline-flex
+              items-center
+              gap-3
+              font-[doner]
+              text-[10px]
+              uppercase
+              tracking-[0.16em]
+              text-[#F1F0EC]/80
+              transition-colors
+              duration-300
+              hover:text-[#F1F0EC]
+              sm:text-[11px]
+            "
+          >
+            <span>
+              More
+            </span>
+
+            <span
+              className="
+                transition-transform
+                duration-300
+              "
+            >
+              ↗
+            </span>
+          </button>
+        )}
       </div>
 
       {/* =====================================================
