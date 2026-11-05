@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Keep scrollbar visible for better scroll feedback */
+/* Keep vertical scrollbar visible for better scroll feedback */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 0; /* Hide horizontal scrollbar */
 }
 
 ::-webkit-scrollbar-track {
@@ -18,6 +19,11 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* Hide horizontal scrollbar specifically */
+::-webkit-scrollbar-horizontal {
+  display: none;
 }
 
 @font-face {
