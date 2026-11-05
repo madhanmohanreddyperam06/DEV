@@ -339,9 +339,7 @@ const AboutVisual = () => {
                     </div>
 
                     {/* Center dot */}
-                    <div className="flex justify-center">
-                      <div className="w-3 h-3 rounded-full bg-black border-2 border-red-500/50 relative z-10 mt-2" />
-                    </div>
+                    <div className="flex justify-center" />
 
                     {/* Right side */}
                     <div className={`flex ${!isLeft ? 'justify-start pl-12' : 'justify-end pr-12'}`}>
@@ -373,18 +371,15 @@ const AboutVisual = () => {
 
         {/* Mobile Timeline */}
         <div className="md:hidden">
-          <div className="relative pl-8">
+          <div className="relative pl-6">
             {/* Left line */}
-            <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
+            <div className="absolute left-[6px] top-0 bottom-0 w-px bg-white/10" />
 
             {journeyData.map((item, index) => (
               <div
                 key={index}
                 className={`relative ${index < journeyData.length - 1 ? 'mb-16' : ''}`}
               >
-                {/* Mobile dot */}
-                <div className="absolute left-[-5px] top-1 w-3 h-3 rounded-full bg-black border-2 border-red-500/50" />
-
                 <div className="font-[doner] text-[10px] tracking-[0.16em] text-red-500/80 mb-2">
                   {item.year}
                 </div>

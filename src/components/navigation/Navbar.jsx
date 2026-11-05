@@ -26,6 +26,8 @@ const FaPatreon = ({ className }) => (
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isInAboutSection, setIsInAboutSection] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const navbarRef = useRef(null);
 
@@ -87,6 +89,38 @@ const Navbar = () => {
       sectionId: "contact",
     },
   ];
+
+  // ==========================================================
+  // MOBILE DETECTION
+  // ==========================================================
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // ==========================================================
+  // SCROLL DETECTION FOR ABOUT SECTION
+  // ==========================================================
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const aboutSection = document.getElementById('about');
+      if (!aboutSection) return;
+
+      const rect = aboutSection.getBoundingClientRect();
+      const isInAbout = rect.top <= 0;
+
+      setIsInAboutSection(isInAbout);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check on mount
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // ==========================================================
   // INITIAL NAVBAR ENTRANCE
@@ -533,7 +567,7 @@ const Navbar = () => {
 
       <nav
         ref={navbarRef}
-        className="fixed left-0 top-0 z-[9000] w-full px-5 py-5 sm:px-7 md:px-9"
+        className={`fixed left-0 top-0 z-[9000] w-full px-5 py-5 sm:px-7 md:px-9 transition-colors duration-300 ${isInAboutSection && isMobile ? 'bg-black' : ''}`}
       >
         <div className="flex items-center justify-between">
           {/* LOGO */}
@@ -561,7 +595,7 @@ const Navbar = () => {
             aria-expanded={isOpen}
             className="group flex items-center gap-3 text-white"
           >
-            <span className="font-[doner] text-[11px] uppercase tracking-[0.24em] sm:text-xs">
+            <span className="hidden font-[doner] text-[11px] uppercase tracking-[0.24em] sm:block sm:text-xs">
               Menu
             </span>
 
