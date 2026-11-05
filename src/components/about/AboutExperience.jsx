@@ -374,7 +374,7 @@ const AboutExperience = () => {
 
       <div
         ref={visualRef}
-        className="relative h-screen w-full"
+        className="relative min-h-screen w-full"
       >
         <AboutVisual />
       </div>

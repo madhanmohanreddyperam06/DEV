@@ -1,6 +1,8 @@
 import React, {
   useLayoutEffect,
   useRef,
+  useState,
+  useEffect,
 } from "react";
 
 import gsap from "gsap";
@@ -10,13 +12,47 @@ gsap.registerPlugin(ScrollTrigger);
 
 const heroImage = "/images/herobg1.avif";
 
+const journeyData = [
+  {
+    year: "2022",
+    tag: "Started",
+    title: "Engineering Journey",
+    description: "Began B.Tech in Computer Science & Engineering at Kalasalingam University, focusing on AI & Machine Learning."
+  },
+  {
+    year: "2023",
+    tag: "Learning",
+    title: "Web Development",
+    description: "Explored modern web technologies including React, Node.js, and various frameworks while building personal projects."
+  },
+  {
+    year: "2024",
+    tag: "Hackathons",
+    title: "Competitive Coding",
+    description: "Participated in multiple hackathons and coding competitions, enhancing problem-solving skills and practical experience."
+  },
+  {
+    year: "2025",
+    tag: "Building",
+    title: "Full Stack Focus",
+    description: "Deepened expertise in full-stack development, building scalable applications and exploring advanced AI integration."
+  }
+];
+
 const AboutVisual = () => {
   const sectionRef = useRef(null);
+  const timelineRef = useRef(null);
 
   const labelRef = useRef(null);
-  const statementRef = useRef(null);
-  const statementWordsRef = useRef([]);
   const hintRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -65,30 +101,13 @@ const AboutVisual = () => {
               y: 14,
             });
 
-            gsap.set(statementWordsRef.current, {
-              opacity: 0,
-              y: 28,
-              filter: "blur(8px)",
-            });
-
             gsap.set(hintRef.current, {
               opacity: 0,
               y: 14,
             });
           };
 
-          /*
-           * Initial state.
-           * Nothing automatically plays on page load.
-           */
-
           resetAbout();
-
-          /*
-           * ======================================================
-           * ABOUT REVEAL TIMELINE
-           * ======================================================
-           */
 
           const aboutTimeline = gsap.timeline({
             paused: true,
@@ -102,18 +121,6 @@ const AboutVisual = () => {
               ease: "power3.out",
             })
             .to(
-              statementWordsRef.current,
-              {
-                opacity: 1,
-                y: 0,
-                filter: "blur(0px)",
-                duration: 0.95,
-                stagger: 0.1,
-                ease: "power4.out",
-              },
-              "-=0.32"
-            )
-            .to(
               hintRef.current,
               {
                 opacity: 1,
@@ -121,23 +128,8 @@ const AboutVisual = () => {
                 duration: 0.6,
                 ease: "power3.out",
               },
-              "-=0.42"
+              "-=0.3"
             );
-
-          /*
-           * ======================================================
-           * SCROLLTRIGGER
-           *
-           * Scroll down:
-           *   About enters -> animation plays
-           *
-           * Scroll back above:
-           *   animation resets
-           *
-           * Scroll down again:
-           *   animation plays again
-           * ======================================================
-           */
 
           ScrollTrigger.create({
             trigger: section,
@@ -171,10 +163,12 @@ const AboutVisual = () => {
       ref={sectionRef}
       className="
         relative
-        h-screen
+        h-auto
+        min-h-screen
         w-full
         overflow-hidden
         bg-black
+        py-20
       "
     >
       {/* ==========================================================
@@ -268,7 +262,7 @@ const AboutVisual = () => {
               text-white/35
             "
           >
-            01
+            02
           </span>
 
           <span
@@ -288,73 +282,127 @@ const AboutVisual = () => {
               text-white/50
             "
           >
-            About
+            Journey
           </span>
         </div>
       </div>
 
       {/* ==========================================================
-          STATEMENT
+          TIMELINE
           ========================================================== */}
 
       <div
-        ref={statementRef}
-        data-about-visual-statement
+        ref={timelineRef}
         className="
-          absolute
-          left-1/2
-          top-1/2
+          relative
           z-20
           w-[90vw]
-          -translate-x-1/2
-          -translate-y-1/2
-          text-center
+          mx-auto
+          pt-32
+          pb-20
         "
       >
-        <p
-          className="
-            mx-auto
-            max-w-[860px]
-            font-[doner]
-            text-[clamp(1.7rem,3.2vw,3.6rem)]
-            leading-[1.08]
-            tracking-[-0.025em]
-            text-white/90
-          "
-        >
-          <span
-            ref={(el) => {
-              statementWordsRef.current[0] = el;
-            }}
-          >
-            I make
-          </span>{" "}
+        {/* Desktop Timeline */}
+        <div className="hidden md:block">
+          <div className="relative">
+            {/* Center line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2" />
 
-          <span
-            ref={(el) => {
-              statementWordsRef.current[1] = el;
-            }}
-          >
-            complex
-          </span>{" "}
+            {journeyData.map((item, index) => {
+              const isLeft = index % 2 === 0;
+              return (
+                <div
+                  key={index}
+                  className={`relative ${index < journeyData.length - 1 ? 'mb-24' : ''}`}
+                >
+                  <div className="grid grid-cols-[1fr_56px_1fr]">
+                    {/* Left side */}
+                    <div className={`flex ${isLeft ? 'justify-end pr-12' : 'justify-start pl-12'}`}>
+                      {isLeft && (
+                        <div className="max-w-[300px] text-right">
+                          <div className="font-[doner] text-[10px] tracking-[0.16em] text-red-500/80 mb-2">
+                            {item.year}
+                          </div>
+                          <div className="inline-block mb-2">
+                            <span className="font-[doner] text-[9px] tracking-[0.12em] text-red-500/60 uppercase px-2 py-1 border border-red-500/20">
+                              {item.tag}
+                            </span>
+                          </div>
+                          <h3 className="font-[doner] text-lg font-semibold tracking-[-0.02em] text-white mb-2">
+                            {item.title}
+                          </h3>
+                          <p className="text-white/50 text-sm leading-relaxed">
+                            {item.description}
+                          </p>
+                        </div>
+                      )}
+                    </div>
 
-          <span
-            ref={(el) => {
-              statementWordsRef.current[2] = el;
-            }}
-          >
-            things
-          </span>{" "}
+                    {/* Center dot */}
+                    <div className="flex justify-center">
+                      <div className="w-3 h-3 rounded-full bg-black border-2 border-red-500/50 relative z-10 mt-2" />
+                    </div>
 
-          <span
-            ref={(el) => {
-              statementWordsRef.current[3] = el;
-            }}
-            className="italic text-white"
-          >
-            feel simple.
-          </span>
-        </p>
+                    {/* Right side */}
+                    <div className={`flex ${!isLeft ? 'justify-start pl-12' : 'justify-end pr-12'}`}>
+                      {!isLeft && (
+                        <div className="max-w-[300px] text-left">
+                          <div className="font-[doner] text-[10px] tracking-[0.16em] text-red-500/80 mb-2">
+                            {item.year}
+                          </div>
+                          <div className="inline-block mb-2">
+                            <span className="font-[doner] text-[9px] tracking-[0.12em] text-red-500/60 uppercase px-2 py-1 border border-red-500/20">
+                              {item.tag}
+                            </span>
+                          </div>
+                          <h3 className="font-[doner] text-lg font-semibold tracking-[-0.02em] text-white mb-2">
+                            {item.title}
+                          </h3>
+                          <p className="text-white/50 text-sm leading-relaxed">
+                            {item.description}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Mobile Timeline */}
+        <div className="md:hidden">
+          <div className="relative pl-8">
+            {/* Left line */}
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
+
+            {journeyData.map((item, index) => (
+              <div
+                key={index}
+                className={`relative ${index < journeyData.length - 1 ? 'mb-16' : ''}`}
+              >
+                {/* Mobile dot */}
+                <div className="absolute left-[-5px] top-1 w-3 h-3 rounded-full bg-black border-2 border-red-500/50" />
+
+                <div className="font-[doner] text-[10px] tracking-[0.16em] text-red-500/80 mb-2">
+                  {item.year}
+                </div>
+                <div className="inline-block mb-2">
+                  <span className="font-[doner] text-[9px] tracking-[0.12em] text-red-500/60 uppercase px-2 py-1 border border-red-500/20">
+                    {item.tag}
+                  </span>
+                </div>
+                <h3 className="font-[doner] text-base font-semibold tracking-[-0.02em] text-white mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* ==========================================================
