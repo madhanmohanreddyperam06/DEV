@@ -130,24 +130,7 @@ const AboutInfo = () => {
             text-[#F1F0EC]
           "
         >
-          I build systems that{" "}
-          <span
-            className="
-              italic
-              text-[#D7D5CF]
-            "
-          >
-            think
-          </span>{" "}
-          and interfaces that{" "}
-          <span
-            className="
-              italic
-              text-[#D7D5CF]
-            "
-          >
-            move.
-          </span>
+          Madhan Mohan Reddy Peram
         </div>
 
         {/* ===================================================
@@ -172,9 +155,9 @@ const AboutInfo = () => {
             md:text-[13px]
           "
         >
-          From AI/ML and data to frontend and interaction,
-          I turn technical ideas into products that feel
-          clear, responsive, and deliberately made.
+          Engineer by logic, developer by passion and innovator by curiosity. 
+          <br />
+          Crafting intelligent applications through AI & Modern Web Technologies.
         </p>
 
         {/* ===================================================
@@ -208,7 +191,7 @@ const AboutInfo = () => {
               hover:text-white/[0.85]
             "
           >
-            INTELLIGENCE
+            ENGINEERING
           </span>
 
           <span className="mx-4 h-3 w-px shrink-0 bg-red-500/[0.65]" />
@@ -220,7 +203,7 @@ const AboutInfo = () => {
               hover:text-white/[0.85]
             "
           >
-            SYSTEMS
+            TECHNOLOGY
           </span>
 
           <span className="mx-4 h-3 w-px shrink-0 bg-red-500/[0.65]" />
@@ -248,6 +231,55 @@ const AboutInfo = () => {
             AVAILABLE WORLDWIDE
           </span>
         </div>
+
+        {/* ===================================================
+            MORE BUTTON
+        ==================================================== */}
+
+        <button
+          className="
+            mt-8
+            inline-flex
+            items-center
+            gap-3
+            rounded-none
+            border
+            border-[#F1F0EC]/35
+            bg-transparent
+            px-7
+            py-3.5
+            font-[doner]
+            text-[10px]
+            uppercase
+            tracking-[0.16em]
+            text-[#F1F0EC]/80
+            transition-all
+            duration-500
+            ease-out
+            hover:border-[#F1F0EC]
+            hover:bg-[#F1F0EC]
+            hover:text-[#080808]
+            sm:px-8
+            sm:py-4
+            sm:text-[11px]
+          "
+        >
+          <span>
+            More
+          </span>
+
+          <span
+            className="
+              translate-x-0
+              transition-transform
+              duration-500
+              ease-out
+              group-hover:translate-x-1
+            "
+          >
+            ↗
+          </span>
+        </button>
       </div>
 
       {/* =====================================================

@@ -9,33 +9,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AboutExperience = () => {
   const sectionRef = useRef(null);
-  const visualRef = useRef(null);
   const infoRef = useRef(null);
+  const visualRef = useRef(null);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    const visual = visualRef.current;
     const info = infoRef.current;
+    const visual = visualRef.current;
 
-    if (!section || !visual || !info) return;
+    if (!section || !info || !visual) return;
 
     const ctx = gsap.context(() => {
-      const visualLabel = visual.querySelector(
-        "[data-about-visual-label]"
-      );
-
-      const visualStatement = visual.querySelector(
-        "[data-about-visual-statement]"
-      );
-
-      const visualHint = visual.querySelector(
-        "[data-about-visual-hint]"
-      );
-
-      const visualImage = visual.querySelector(
-        "[data-about-visual-image]"
-      );
-
       const infoLabel = info.querySelector(
         "[data-about-info-label]"
       );
@@ -60,6 +44,22 @@ const AboutExperience = () => {
         "[data-about-info-side]"
       );
 
+      const visualLabel = visual.querySelector(
+        "[data-about-visual-label]"
+      );
+
+      const visualStatement = visual.querySelector(
+        "[data-about-visual-statement]"
+      );
+
+      const visualHint = visual.querySelector(
+        "[data-about-visual-hint]"
+      );
+
+      const visualImage = visual.querySelector(
+        "[data-about-visual-image]"
+      );
+
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
@@ -68,25 +68,6 @@ const AboutExperience = () => {
          * INITIAL STATES
          * ------------------------------------------------------
          */
-
-        gsap.set(visualLabel, {
-          y: 18,
-          opacity: 0,
-        });
-
-        gsap.set(visualStatement, {
-          y: 30,
-          opacity: 0,
-        });
-
-        gsap.set(visualHint, {
-          y: 12,
-          opacity: 0,
-        });
-
-        gsap.set(visualImage, {
-          scale: 1.04,
-        });
 
         gsap.set(
           [
@@ -108,11 +89,30 @@ const AboutExperience = () => {
           scale: 1.03,
         });
 
+        gsap.set(visualLabel, {
+          y: 18,
+          opacity: 0,
+        });
+
+        gsap.set(visualStatement, {
+          y: 30,
+          opacity: 0,
+        });
+
+        gsap.set(visualHint, {
+          y: 12,
+          opacity: 0,
+        });
+
+        gsap.set(visualImage, {
+          scale: 1.04,
+        });
+
         /*
          * ------------------------------------------------------
          * SCENE 1
          *
-         * Runs only while ABOUT VISUAL is entering.
+         * Runs only while ABOUT INFO is entering.
          * No pinning.
          * No sticky viewport.
          * ------------------------------------------------------
@@ -121,115 +121,10 @@ const AboutExperience = () => {
         gsap
           .timeline({
             scrollTrigger: {
-              trigger: visual,
+              trigger: info,
               start: "top 88%",
               end: "top 18%",
               scrub: 0.8,
-            },
-          })
-          .to(
-            visualLabel,
-            {
-              y: 0,
-              opacity: 1,
-              ease: "power3.out",
-            },
-            0
-          )
-          .to(
-            visualStatement,
-            {
-              y: 0,
-              opacity: 1,
-              ease: "power3.out",
-            },
-            0.08
-          )
-          .to(
-            visualHint,
-            {
-              y: 0,
-              opacity: 1,
-              ease: "power3.out",
-            },
-            0.15
-          )
-          .to(
-            visualImage,
-            {
-              scale: 1,
-              ease: "none",
-            },
-            0
-          );
-
-        /*
-         * ------------------------------------------------------
-         * SCENE 1 EXIT
-         *
-         * Very small movement while leaving.
-         * The browser still controls the actual page scroll.
-         * ------------------------------------------------------
-         */
-
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: visual,
-              start: "top 22%",
-              end: "bottom 35%",
-              scrub: 0.9,
-            },
-          })
-          .to(
-            visualStatement,
-            {
-              y: -45,
-              opacity: 0.45,
-              ease: "none",
-            },
-            0
-          )
-          .to(
-            visualLabel,
-            {
-              y: -20,
-              opacity: 0,
-              ease: "none",
-            },
-            0
-          )
-          .to(
-            visualHint,
-            {
-              y: -15,
-              opacity: 0,
-              ease: "none",
-            },
-            0
-          )
-          .to(
-            visualImage,
-            {
-              scale: 1.025,
-              ease: "none",
-            },
-            0
-          );
-
-        /*
-         * ------------------------------------------------------
-         * SCENE 2 ENTER
-         * ------------------------------------------------------
-         */
-
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: info,
-              start: "top 85%",
-              end: "top 15%",
-              scrub: 0.9,
             },
           })
           .to(
@@ -290,15 +185,120 @@ const AboutExperience = () => {
 
         /*
          * ------------------------------------------------------
+         * SCENE 1 EXIT
+         *
+         * Very small movement while leaving.
+         * The browser still controls the actual page scroll.
+         * ------------------------------------------------------
+         */
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: info,
+              start: "top 22%",
+              end: "bottom 35%",
+              scrub: 0.9,
+            },
+          })
+          .to(
+            infoTitle,
+            {
+              y: -45,
+              opacity: 0.45,
+              ease: "none",
+            },
+            0
+          )
+          .to(
+            infoLabel,
+            {
+              y: -20,
+              opacity: 0,
+              ease: "none",
+            },
+            0
+          )
+          .to(
+            infoParagraph,
+            {
+              y: -15,
+              opacity: 0,
+              ease: "none",
+            },
+            0
+          )
+          .to(
+            infoPortrait,
+            {
+              scale: 1.025,
+              ease: "none",
+            },
+            0
+          );
+
+        /*
+         * ------------------------------------------------------
+         * SCENE 2 ENTER
+         * ------------------------------------------------------
+         */
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: visual,
+              start: "top 85%",
+              end: "top 15%",
+              scrub: 0.9,
+            },
+          })
+          .to(
+            visualLabel,
+            {
+              y: 0,
+              opacity: 1,
+              ease: "power3.out",
+            },
+            0
+          )
+          .to(
+            visualStatement,
+            {
+              y: 0,
+              opacity: 1,
+              ease: "power3.out",
+            },
+            0.08
+          )
+          .to(
+            visualHint,
+            {
+              y: 0,
+              opacity: 1,
+              ease: "power3.out",
+            },
+            0.15
+          )
+          .to(
+            visualImage,
+            {
+              scale: 1,
+              ease: "none",
+            },
+            0
+          );
+
+        /*
+         * ------------------------------------------------------
          * SCENE 2 PARALLAX
          * ------------------------------------------------------
          */
 
-        gsap.to(infoPortrait, {
+        gsap.to(visualImage, {
           yPercent: -4,
           ease: "none",
           scrollTrigger: {
-            trigger: info,
+            trigger: visual,
             start: "top bottom",
             end: "bottom top",
             scrub: 1,
@@ -308,8 +308,8 @@ const AboutExperience = () => {
         return () => {
           ScrollTrigger.getAll().forEach((trigger) => {
             if (
-              trigger.trigger === visual ||
-              trigger.trigger === info
+              trigger.trigger === info ||
+              trigger.trigger === visual
             ) {
               trigger.kill();
             }
@@ -320,14 +320,14 @@ const AboutExperience = () => {
       mm.add("(prefers-reduced-motion: reduce)", () => {
         gsap.set(
           [
-            visualLabel,
-            visualStatement,
-            visualHint,
             infoLabel,
             infoTitle,
             infoParagraph,
             infoMeta,
             infoSideLabel,
+            visualLabel,
+            visualStatement,
+            visualHint,
           ],
           {
             clearProps: "all",
@@ -335,7 +335,7 @@ const AboutExperience = () => {
         );
 
         gsap.set(
-          [visualImage, infoPortrait],
+          [infoPortrait, visualImage],
           {
             clearProps: "all",
           }
@@ -364,19 +364,19 @@ const AboutExperience = () => {
       {/* SCENE 1 */}
 
       <div
-        ref={visualRef}
+        ref={infoRef}
         className="relative h-screen w-full"
       >
-        <AboutVisual />
+        <AboutInfo />
       </div>
 
       {/* SCENE 2 */}
 
       <div
-        ref={infoRef}
+        ref={visualRef}
         className="relative h-screen w-full"
       >
-        <AboutInfo />
+        <AboutVisual />
       </div>
     </section>
   );
