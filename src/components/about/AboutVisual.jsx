@@ -15,27 +15,33 @@ const heroImage = "/images/herobg1.avif";
 const journeyData = [
   {
     year: "2022",
-    tag: "Started",
-    title: "Engineering Journey",
-    description: "Began B.Tech in Computer Science & Engineering at Kalasalingam University, focusing on AI & Machine Learning."
+    tag: "Origin",
+    title: "Programming Foundation at University",
+    description: "Began learning programming fundamentals & Problem Solving."
   },
   {
     year: "2023",
-    tag: "Learning",
-    title: "Web Development",
-    description: "Explored modern web technologies including React, Node.js, and various frameworks while building personal projects."
+    tag: "Growth",
+    title: "Built Academic Projects",
+    description: "Started developing comprehensive python based applications."
   },
   {
     year: "2024",
-    tag: "Hackathons",
-    title: "Competitive Coding",
-    description: "Participated in multiple hackathons and coding competitions, enhancing problem-solving skills and practical experience."
+    tag: "Experience",
+    title: "AI Developer Internship",
+    description: "Worked at Viswam AI contributing to Bhashaverse and Artificial Intelligence related workflows."
   },
   {
     year: "2025",
-    tag: "Building",
-    title: "Full Stack Focus",
-    description: "Deepened expertise in full-stack development, building scalable applications and exploring advanced AI integration."
+    tag: "Training",
+    title: "Full Stack Development Training at matrimony.com",
+    description: "Training Led by Industry Experts — From Core Fundamentals to Production-Ready Systems."
+  },
+  {
+    year: "2026",
+    tag: "Today",
+    title: "Engineering Graduate",
+    description: "Graduating with Hands-On Experience in Core Programming and Full-Stack Development."
   }
 ];
 
@@ -298,23 +304,26 @@ const AboutVisual = () => {
           z-20
           w-[90vw]
           mx-auto
-          pt-32
+          pt-20
+          md:pt-24
           pb-20
         "
       >
         {/* Desktop Timeline */}
         <div className="hidden md:block">
           <div className="relative">
-            {/* Center line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2" />
-
             {journeyData.map((item, index) => {
               const isLeft = index % 2 === 0;
               return (
                 <div
                   key={index}
-                  className={`relative ${index < journeyData.length - 1 ? 'mb-24' : ''}`}
+                  className={`relative ${index < journeyData.length - 1 ? 'pb-24' : ''}`}
                 >
+                  {/* Connecting line to next dot */}
+                  {index < journeyData.length - 1 && (
+                    <div className="absolute left-1/2 top-[14px] -translate-x-1/2 w-px h-full bg-white/10" />
+                  )}
+
                   <div className="grid grid-cols-[1fr_56px_1fr]">
                     {/* Left side */}
                     <div className={`flex ${isLeft ? 'justify-end pr-12' : 'justify-start pl-12'}`}>
@@ -374,14 +383,16 @@ const AboutVisual = () => {
         {/* Mobile Timeline */}
         <div className="md:hidden">
           <div className="relative">
-            {/* Left line */}
-            <div className="absolute left-3 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2" />
-
             {journeyData.map((item, index) => (
               <div
                 key={index}
-                className={`relative pl-8 ${index < journeyData.length - 1 ? 'mb-16' : ''}`}
+                className={`relative pl-8 ${index < journeyData.length - 1 ? 'pb-16' : ''}`}
               >
+                {/* Connecting line to next dot */}
+                {index < journeyData.length - 1 && (
+                  <div className="absolute left-3 top-[10px] -translate-x-1/2 w-px h-full bg-white/10" />
+                )}
+
                 {/* Mobile dot */}
                 <div className="absolute left-3 top-1 w-3 h-3 -translate-x-1/2 rounded-full bg-black border-2 border-red-500/50 z-10" />
 
